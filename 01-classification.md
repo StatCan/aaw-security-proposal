@@ -42,7 +42,10 @@ The proposed labelling for classification is:
 | `secret`           | Secret           |
 | `top-secret`       | Top Secret       |
 
-> **Important note**: Labels in Kubernetes are mutable, meaning they can be
-> changed at any time. To prevent security incidents, we must enforce that
-> the classification label be immutable. This will be done through Gatekeeper
-> and the Open Policy Agent.
+> If the classification label is not provided,
+> then the workload is assumed to be Unclassified.
+
+**Important note**: Labels in Kubernetes are mutable, meaning they can be
+changed at any time. To prevent security incidents, we must enforce that
+the classification label be immutable. This will be done through Gatekeeper
+and the Open Policy Agent.
