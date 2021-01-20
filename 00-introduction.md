@@ -43,7 +43,7 @@ The platform was built as a collaboration between:
 ## Technology
 
 The Advanced Analytics Workspaces is constructed of many tools. Its base
-is built on Kubernetes, Cloud Native Computing Foundation(CNCF) tooling,
+is built on Kubernetes, Cloud Native Computing Foundation (CNCF) tooling,
 and Kubeflow.
 
 More details of the platform available on Statistics Canada DAaaS
