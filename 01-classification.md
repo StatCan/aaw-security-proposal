@@ -24,7 +24,7 @@ According to the Kubernetes documentation, labels are:
 > modified at any time. Each object can have a set of key/value labels defined.
 > Each Key must be unique for a given object.
 >
-> https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/
+> — https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/
 
 The proposed labelling for classification is:
 
