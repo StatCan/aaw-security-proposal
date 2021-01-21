@@ -16,6 +16,11 @@ Additionally, data is obtained from the following sources:
 
 Access to data will be more restricted from protected workloads.
 
+In general, the rules are:
+
+1. Protected B data may be read and written to by a Protected B pod
+2. Unclassified data may be **only read** by a Protected B pod
+
 ## Disk storage
 
 Access to disk storage will be restricted based on the classification of the
@@ -53,3 +58,11 @@ To facilitate fetching data from the internet, a one-way synchronization from
 the unclassified Standard MinIO instance will be performed. A write-only bucket
 on the Standard MinIO instance will be mirrored to a read-only bucket on
 the protected B MinIO instance.
+
+## Receiving and outputing Protected B data to/from AAW
+
+This proposal does not propose a solution for receiving Protected B data into
+the environment nor for extracting output from completed analysis. This will
+require coordination with the appropriate groups at Statistics Canada
+and will be left to the Data Analytics as a Service (DAaaS) project for
+elaboration and design.
