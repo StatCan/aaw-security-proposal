@@ -26,7 +26,7 @@ According to the Kubernetes documentation, labels are:
 >
 > — https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/
 
-The prposed Kubernetes label for tracking the data classification of objects
+The proposed Kubernetes label for tracking the data classification of objects
 is `data.statcan.gc.ca/classification`.
 
 ### `data.statcan.gc.ca/classification`
