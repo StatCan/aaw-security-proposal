@@ -26,9 +26,15 @@ According to the Kubernetes documentation, labels are:
 >
 > — https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/
 
-The proposed labelling for classification is:
+The prposed Kubernetes label for tracking the data classification of objects
+is `data.statcan.gc.ca/classification`.
 
 ### `data.statcan.gc.ca/classification`
+
+The classification label will track the data classification of the labelled
+object. The classification value on storage-related objects will identify
+the data classification, whereas the classification on compute-related objects
+will represent the classification of data that is processed by the object.
 
 > Only **bolded** values will be used within the AAW.
 
