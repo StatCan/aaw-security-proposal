@@ -5,21 +5,21 @@ within the Advanced Analytics Workspaces. The AAW environment consists
 currently of two main types of storage:
 
 *	Disk storage (attached to one pod at a time)
-*	MinIO object storage
-	* Private bucket (accessible only to the project)
-	*	Shared bucket (readable by all users)
+*	Object storage
 
 Additionally, data is obtained from the following sources:
 
-* MinIO object storage
-* External data source available from the Internet
+* Object storage (internal to AAW)
+* Statistics Canada public data
+* External data sources
 
-Access to data will be more restricted from protected workloads.
+Access to data stores will be more restricted from protected workloads.
 
 In general, the rules are:
 
-1. Protected B data may be read and written to by a Protected B pod
-2. Unclassified data may be **only read** by a Protected B pod
+1. Protected B data stores may be read and written to by a Protected B workload
+2. Unclassified data stores may be **only read** by a Protected B workload
+3. Protected B data stores may never be accessed from an unclassified workload
 
 ## Disk storage
 
@@ -39,8 +39,8 @@ whether the combination is permitted or denied:
 | Protected B         | Read only  | Protected B        | Permitted |
 | Protected B         | Read/write | Protected B        | Permitted |
 
-Disk policies will be enforced by policy in Gatekeeper and the
-Open Policy Agent.
+> Disk policies will be enforced by policy in Gatekeeper and the
+> Open Policy Agent.
 
 ## Object storage
 
@@ -58,6 +58,17 @@ To facilitate fetching data from the internet, a one-way synchronization from
 the unclassified Standard MinIO instance will be performed. A write-only bucket
 on the Standard MinIO instance will be mirrored to a read-only bucket on
 the protected B MinIO instance.
+
+The synchronization pod will be the only pod which will be authorized to access
+both the Unclassified and Protected B MinIO instances. The credentials assigned
+to it will be:
+
+* Read-only on the Unclassified instance in the “Sync” bucket
+* Write-only on the Protected B instance in the “Sync” bucket
+
+All users will have write access to the “Sync” bucket on the Unclassified
+instance, and all users will have read access to the “Sync” bucket on the
+Protected B instance.
 
 ## Receiving and outputing Protected B data to/from AAW
 
