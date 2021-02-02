@@ -11,7 +11,7 @@ posture with regards to data exfiltration.
 
 **Relation with Azure controls**: The AAW environment is relying
 on defense-in-depth, so there are multiple levels of network
-controls restrict unauthorized network connectivity. Additionally,
+controls to restrict unauthorized network connectivity. Additionally,
 the Azure controls cannot restrict access to specific services within
 the cluster whereas the Kubernetes-level security controls can.
 
