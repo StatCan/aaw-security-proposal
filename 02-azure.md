@@ -80,6 +80,9 @@ the principle of least privilege.
 >
 > - `aaw-prod-cc-vnet-00`: the first production virtual network in Canada Central
 > - `aaw-prod-cc-aks-00`: the first AKS cluster in Canada Central
+>
+> *Where resources do not support `-` in the name, then
+> the `-` should be omitted from the resource name.*
 
 ## Networking
 
