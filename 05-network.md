@@ -42,7 +42,7 @@ spec:
 
 > **Recommendation NET-POL-01**: The above network policy strategy be approved.
 
-## In-transit encrpytion
+## In-transit encryption
 
 Any service which is made available to Protected B workloads must be placed
 on the Istio Service Mesh, which provides automatic TLS encryption for all
