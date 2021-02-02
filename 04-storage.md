@@ -42,6 +42,9 @@ whether the combination is permitted or denied:
 > Disk policies will be enforced by policy in Gatekeeper and the
 > Open Policy Agent.
 
+> **Recommendation STR-DSK-01**: The above disk policy be applied
+> to the AAW environment.
+
 ## Object storage
 
 A separate Protected B MinIO instance will be created for protected workloads.
@@ -51,6 +54,9 @@ except it will not be available outside of protected workloads
 
 Restricted access to MinIO storage will be implemented
 using *Network Policies*.
+
+> **Recommendation STR-OBJ-01**: The above object storage policy be applied
+> to the AAW environment.
 
 ### One-way synchronization with unclassified MinIO instance
 
@@ -69,6 +75,10 @@ to it will be:
 All users will have write access to the “Sync” bucket on the Unclassified
 instance, and all users will have read access to the “Sync” bucket on the
 Protected B instance.
+
+> **Recommendation STR-OBJ-02**: The above object storage synchronization
+> process be approved, providing a write-only bucket in the Unclassified
+> instance mapped to a read-only bucket on the Protected B instance.
 
 ## Receiving and outputing Protected B data to/from AAW
 

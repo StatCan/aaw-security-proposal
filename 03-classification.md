@@ -26,8 +26,9 @@ According to the Kubernetes documentation, labels are:
 >
 > — https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/
 
-The proposed Kubernetes label for tracking the data classification of objects
-is `data.statcan.gc.ca/classification`.
+> **Recommendation CL-LBL-01**: The proposed Kubernetes label for tracking
+> the data classification of objects is `data.statcan.gc.ca/classification`,
+> as described below.
 
 ### `data.statcan.gc.ca/classification`
 
@@ -55,3 +56,7 @@ will represent the classification of data that is processed by the object.
 changed at any time. To prevent security incidents, we must enforce that
 the classification label be immutable. This will be done through Gatekeeper
 and the Open Policy Agent.
+
+> **Recommendation CL-LBL-02**: The proposed Kubernetes label
+> `data.statcan.gc.ca/classification` be made "immutable"
+> via Gatekeeper / Open Policy Agent policies.
