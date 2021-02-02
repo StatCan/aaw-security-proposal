@@ -115,7 +115,7 @@ of each connection.
 
 The Azure Firewall sits at the edge of the AAW environment and
 serves as the last defence between the internal networks
-and the general internt.
+and the general internet.
 
 > **Recommendation AZ-FW-01**: The Azure Firewall be used at the edge
 > of the AAW networks.
