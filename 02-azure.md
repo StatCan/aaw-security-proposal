@@ -171,6 +171,18 @@ managed keys.*
 > **Recommendation AZ-STR-01**: Customer Managed Keys be utlized where possible
 > within the Azure environment.
 
+> **Recommendation AZ-STR-02**: The Azure Key Vault key for storage encryption
+> be backed by a Hardware Security Module (HSM).
+>
+> There are two options:
+>
+> - Shared HSM: $1.28/key/month + $0.039/10000 transactions
+> - Single-tenant HSM: $6.208/hours (~$4,600/mnth)
+>
+> Automatic key rotation should be configured for storage encryption keys,
+> assuming this is available for all services. If it is not, then manual
+> rotation should occur every 90 days (3 months).
+
 ## Azure Kubernetes Service (AKS)
 
 With the foundational Azure configuration and network configuration,
@@ -211,3 +223,16 @@ AKS supports functionality such as:
 > * [Azure Active Directory authentication](https://docs.microsoft.com/en-us/azure/aks/managed-aad)
 > * [Control Plane Managed Identity](https://docs.microsoft.com/en-us/azure/aks/use-managed-identity#bring-your-own-control-plane-mi)
 > * [Customer Managed Keys for disk encryption](https://docs.microsoft.com/en-us/azure/aks/azure-disk-customer-managed-keys)
+
+The best practices in protecting the AKS cluster is to secure access to the
+control plane of Kubernetes. The best way to do this is by running a fully
+private AKS cluster (using Private Link). Unfortunately, due to reliance
+on external tooling such as GitHub Actions, this is not possible. Therefore,
+the next best option is to apply firewalls protecting the control plan.
+
+> **Recommendation AZ-AKS-04**: Apply control plane firewall which
+> restricts access to Statistics Canada networks only.
+
+> **Recommendation AZ-AKS-05**: To manage the Kubernetes cluster from
+> GitHub Actions, a self-hosted runner should be deployed and utilized
+> so that access to the API server can be kept limited.
