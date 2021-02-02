@@ -45,7 +45,7 @@ The platform was built as a collaboration between:
 The Advanced Analytics Workspaces is constructed of many tools. Its base is
 built on Kubernetes, Cloud Native Computing Foundation (CNCF) tooling, and Kubeflow.
 
-The platform is made up of many different open- source software components.
+The platform is made up of many different open-source software components.
 In addition, some custom components have also been developed to provide desired
 functionality.
 
