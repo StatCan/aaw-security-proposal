@@ -1,6 +1,6 @@
 # Storage
 
-Data is the largest asset and attack surface of the storing Protected B data
+Data is the largest asset and attack surface of Protected B workloads
 within the Advanced Analytics Workspaces. The AAW environment consists
 currently of two main types of storage:
 
