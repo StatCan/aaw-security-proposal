@@ -12,8 +12,8 @@ to properly isolate and control security controls.
 
 Two options were identified on how to design the Protected B workloads:
 
-1. Use two seperate clusters: 1 Unclassified, 1 Protected B
-2. One cluster, with isolation
+1. Use two separate clusters: 1 Unclassified, 1 Protected B
+2. Use one cluster, with isolation
 
 While the first option provides the highest level of security, there
 are major tradeoffs in relation to use experience and maintainability.
