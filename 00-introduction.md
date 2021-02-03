@@ -57,7 +57,7 @@ Components of the platform include, generally, components which either
 provide functionality to end users or components which ensure the
 security of the platform. This proposal will focus on the following
 components of Kubernetes and platform components to provide an isolated
-Protected B base compute environment:
+Protected B compute environment:
 
 - Kubernetes Network Policies
 - Istio Service Mesh
