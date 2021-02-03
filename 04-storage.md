@@ -21,6 +21,10 @@ In general, the rules are:
 2. Unclassified data stores may be **only read** by a Protected B workload
 3. Protected B data stores may never be accessed from an unclassified workload
 
+*Note: This proposal does not define sharing of data between Protected B
+workloads. This is left to the DAaaS project to elaborate and design
+should this funcationality be deemed necessary.*
+
 ## Disk storage
 
 Access to disk storage will be restricted based on the classification of the
