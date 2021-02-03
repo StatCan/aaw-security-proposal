@@ -43,9 +43,9 @@ the principle of least privilege.
 > - `aaw-network-$env-rg`: Network resources (VNET, Firewall)
 > - `aaw-aks-$env-rg`: AKS resources (AKS, Container Registry)
 > - `aaw-backup-$env-rg`: Backup resources (Velero)
-> - `aaw-security-$env-rg`: Security resources (e.g.,
+> - `aaw-security-$env-rg`: Security resources (e.g.
 >    Vault KeyVault, Storage Account)
-> - `aaw-data-$env-rg`: Data resources (e.g., Databases)
+> - `aaw-data-$env-rg`: Data resources (e.g. Databases)
 >
 > where `$env` is `prod` or `nonprod`, reflecting the two AAW environments.
 
