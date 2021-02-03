@@ -16,7 +16,7 @@ Two options were identified on how to design the Protected B workloads:
 2. Use one cluster, with isolation
 
 While the first option provides the highest level of security, there
-are major tradeoffs in relation to use experience and maintainability.
+are major tradeoffs in relation to user experience and maintainability.
 Therefore it was decided that the best balance between security
 and usability/maintainability was provided by option 2.
 
