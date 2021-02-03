@@ -139,7 +139,7 @@ and the general internet.
 #### Network Security Groups (NSGs)
 
 The Azure Firewall provides protection between external networks
-and the Advanced Analytics Environment, but does not provider
+and the Advanced Analytics Environment, but does not provide
 protection for traffic flows within the environment.
 
 Azure provides a Network Security Group (NSG) feature that allows
