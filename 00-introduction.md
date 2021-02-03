@@ -75,7 +75,6 @@ users with the appropriate environment for running Protected B data analysis:
 > and user freedom.
 
 This proposal was created by Zachary Seguin, with the assistance of
-William Hearn, Justin Bertrand, Brendan Gadd, Andrew Scribner,
-and Blair Drummond.
+William Hearn, Justin Bertrand, Brendan Gadd, Andrew Scribner, Blair Drummond and Charles Bélisle.
 
 Any questions should be directed to [zachary.seguin@canada.ca](mailto:zachary.seguin@canada.ca).
