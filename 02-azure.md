@@ -18,7 +18,7 @@ proposed to be configured.
 Currently, the AAW environment lives in the `vdl` subscription. As it stands,
 there are XX person and non-person entities who have full access to resources
 within the subscription (`Owner` or `Contributor` at the subscription level).
-Many of these entities are not related or associated with the AAW project.
+Many of these entities are not related to or associated with the AAW project.
 This provides a high level of risk of many accidental or unauthorized
 activities within the environment, including:
 
