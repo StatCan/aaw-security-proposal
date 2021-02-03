@@ -228,7 +228,7 @@ The best practices in protecting the AKS cluster is to secure access to the
 control plane of Kubernetes. The best way to do this is by running a fully
 private AKS cluster (using Private Link). Unfortunately, due to reliance
 on external tooling such as GitHub Actions, this is not possible. Therefore,
-the next best option is to apply firewalls protecting the control plan.
+the next best option is to apply firewalls protecting the control plane.
 
 > **Recommendation AZ-AKS-04**: Apply control plane firewall which
 > restricts access to Statistics Canada networks only.
