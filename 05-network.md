@@ -91,6 +91,9 @@ A source code system available to both unclassified and Protected B
 workloads introduces some complications from a security posture,
 and in particular how to prevent data exfiltration from the environment.
 
+Therefore, there are three proposals on how to implement a source
+code system in AAW:
+
 > **Recommendation NET-ES-03**: For source code,
 >
 > 1. Continue to use external source code systems for unclassified workloads.
@@ -103,6 +106,21 @@ and in particular how to prevent data exfiltration from the environment.
 >    >
 >    > — https://www.tbs-sct.gc.ca/pol/doc-eng.aspx?id=32588#cha5
 >
-> 2. Launch a GitLab instance for Protected B workloads inside the AAW
->    environment. This GitLab instance will not be exposed via an Ingress,
->    and will only be accessible from Protected B pods.
+>    and launch an internal-only GitLab instance accessible
+>    only to Protected B workloads.
+>
+> 2. Launch a GitLab instance in the AAW environment which is
+>    available to all workloads. Worklods running at the
+>    Protected B level are granted only HEAD / GET requests
+>    to the GitLab instance (to prevent data exfiltration).
+>    POST requests to specificly authorized endpoints,
+>    such as for authorization, will be allowed.
+>
+> 3. Two seperate GitLab instances be launched in the AAW
+>    environment, 1 for unclassified and 1 for Protected B.
+>    This is the least recommended solution due to the
+>    maintenance overhead.
+>
+> **DAaaS should identify the best solution based on the
+> needs of its users, and therefore this proposal
+> does not specific a specific solution.**
