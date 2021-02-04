@@ -110,7 +110,7 @@ code system in AAW:
 >    only to Protected B workloads.
 >
 > 2. Launch a GitLab instance in the AAW environment which is
->    available to all workloads. Worklods running at the
+>    available to all workloads. Workloads running at the
 >    Protected B level are granted only HEAD / GET requests
 >    to the GitLab instance (to prevent data exfiltration).
 >    POST requests to specificly authorized endpoints,
