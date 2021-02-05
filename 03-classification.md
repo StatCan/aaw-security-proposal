@@ -4,11 +4,16 @@ Proper identification of workload classifications is critical to providing
 separation of unclassified and protected workloads within the Advanced
 Analytics Workspaces.
 
-Due to the AAW’s origin in unclassified workloads, the environment will remain
-unclassified by default. This provides the lowest friction to users as most
-workloads do not require access to protected information. Workloads that are
-classified explicitly assigned as protected workloads, then these workloads
-will have a series of restrictions placed on them.
+Due to the AAW’s origin in unclassified workloads, the environment will continue
+to support, and default to, this type of workload. In doing so, it will retain the
+associated flexibility in tooling, connectivity, etc. This approach provides the
+lowest friction to users:
+* Existing unclassified workloads will continue to function
+* Workloads that necessitate external connectivity (e.g. web scraping) remain
+  possible
+Workloads that are explicitly indicated as being Protected will have a series of
+restrictions placed on them and, in turn, may gain controlled access to
+Protected resources.
 
 The proposed identification method for workload identification is labels.
 
