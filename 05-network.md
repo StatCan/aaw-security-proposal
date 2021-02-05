@@ -15,7 +15,9 @@ controls to restrict unauthorized network connectivity. Additionally,
 the Azure controls cannot restrict access to specific services within
 the cluster whereas the Kubernetes-level security controls can.
 
-Finally, it is also important that all network activity be encrypted.
+Finally, it is also important that all network activity be encrypted
+using the Istio service mesh available in the Statistics Canada
+Cloud Native Platform.
 
 ## Network policies
 
@@ -57,7 +59,10 @@ both the client and the server verify each other's identity.
 Protected B workloads should not connect directly to any external service.
 
 > **Recommendation NET-ES-01**: Requests should be mediated
-> through a service running in the AAW Kubernetes cluster.
+> through a service running in the AAW Kubernetes cluster, where possible.
+> If not possible, then the service is to allow-listed on the firewall,
+> since the firewall is deny-by-default. For protected workloads,
+> these exceptions should be limited.
 
 ### Packages
 
@@ -65,9 +70,6 @@ Artifactory provides a package-proxy, which will provide the necessary
 mediation between Protected B workloads and the remote repositories.
 Artifactory is already utilized within the Statistics Canada main
 cloud environment, so there is operational knowledge of the system.
-
-> For additional security, X-Ray should also be installed alongside Artifactory
-> to provide for CVE scanning of packages being imported into the environment.
 
 Package sources should be limited due to the potential risk they can introduce.
 
@@ -79,8 +81,9 @@ the environment.
 
 > **Recommendation NET-ES-02**: Packages be provided through an Artifactory
 > instance running in the AAW environment.
->
-> **(alt)**: An alternative service be investigated for package proxying.
+
+> **Recommendation NET-ES-03**: X-Ray should be installed alongside Artifactory
+> to provide for CVE scanning of packages being imported into the environment.
 
 ### Source code
 
