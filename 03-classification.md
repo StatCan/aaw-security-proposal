@@ -32,9 +32,9 @@ According to the Kubernetes documentation, labels are:
 >
 > — https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/
 
-> **Recommendation CL-LBL-01**: The proposed Kubernetes label for tracking
-> the data classification of objects is `data.statcan.gc.ca/classification`,
-> as described below.
+> **Recommendation CL-LBL-01**: Use Kubernetes label
+> `data.statcan.gc.ca/classification` as a basis for tracking the data
+> classification of, and controlling access to, Kubernetes objects.
 
 ### `data.statcan.gc.ca/classification`
 
