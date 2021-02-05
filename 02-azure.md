@@ -110,6 +110,13 @@ of each connection.
 > | `system`            | `x.y.0.0/18`     | `x.y.0.0`     | `x.y.63.255`  | 16384         |
 > | `user-unclassified` | `x.y.64.0/18`    | `x.y.64.0`    | `x.y.127.255` | 16384         |
 > | `user-protected-b`  | `x.y.128.0/18`   | `x.y.128.0`   | `x.y.191.255` | 16384         |
+> | **AKS**             |                  |               |               |               |
+> | `system`            | `x.y.0.0/18`     | `x.y.0.0`     | `x.y.63.255`  | 16384         |
+> | `user-unclassified` | `x.y.64.0/18`    | `x.y.64.0`    | `x.y.127.255` | 16384         |
+> | `user-protected-b`  | `x.y.128.0/18`   | `x.y.128.0`   | `x.y.191.255` | 16384         |
+> | **Data**            | `x.y.250.0/23`   | `x.y.250.0`   | `x.y.251.255` | 512           |
+> | `data-unclassified` | `x.y.250.0/25`   | `x.y.250.0`   | `x.y.250.127` | 128           |
+> | `data-protected-b`  | `x.y.250.128/25` | `x.y.250.128` | `x.y.250.255` | 128           |
 >
 > *Note*: [Azure Firewall subnet size documentation](https://docs.microsoft.com/en-us/azure/firewall/firewall-faq#why-does-azure-firewall-need-a--26-subnet-size)
 
