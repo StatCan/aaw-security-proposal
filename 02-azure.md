@@ -40,14 +40,15 @@ the principle of least privilege.
 > **Recommendation AZ-RG-01**: The following resource groups be created with
 > the defined purpose:
 >
-> - `aaw-network-$env-rg`: Network resources (VNET, Firewall)
-> - `aaw-aks-$env-rg`: AKS resources (AKS, Container Registry)
-> - `aaw-backup-$env-rg`: Backup resources (Velero)
-> - `aaw-security-$env-rg`: Security resources (e.g.
+> - `aaw-$env-rg-network`: Network resources (VNET, Firewall)
+> - `aaw-$env-rg-aks`: AKS resources (AKS, Container Registry)
+> - `aaw-$env-$region-aks-rg-$num`: AKS managed resources for each cluster
+> - `aaw-$env-rg-backup`: Backup resources (Velero)
+> - `aaw-$env-rg-security`: Security resources (e.g.
 >    Vault KeyVault, Storage Account)
-> - `aaw-data-$env-rg`: Data resources (e.g. Databases)
+> - `aaw-$env-rg-data`: Data resources (e.g. Databases)
 >
-> where `$env` is `prod` or `nonprod`, reflecting the two AAW environments.
+> (see below for variable values)
 
 ## Resource naming
 
@@ -55,12 +56,12 @@ the principle of least privilege.
 >
 > `aaw-$env-$region-$type-$num`, where:
 >
-> | Field     | Value                                                                            |
-> |-----------|----------------------------------------------------------------------------------|
-> | `$type`   | The resource type, usually abbreviated                                           |
-> | `$region` | The region of the resource, if region-specific. Usually `cc`, for Canada Central |
-> | `$env`    | The environment of the resource, usually `prod` or `nonprod`                     |
-> | `$num`    | Unique resource numbering, starting at `00`                                      |
+> | Field     | Value                                                                                                                             |
+> |-----------|-----------------------------------------------------------------------------------------------------------------------------------|
+> | `$type`   | The resource type, usually abbreviated                                                                                            |
+> | `$region` | The region of the resource, if region-specific. Usually `cc`, for Canada Central                                                  |
+> | `$env`    | The environment of the resource, usually `prod` or `dev`                                                                          |
+> | `$num`    | Unique resource numbering, starting at `00`. This may be a purpose instead, where a single purpose exists (typically containers). |
 >
 > Common Azure resources and their abbreviations:
 >
