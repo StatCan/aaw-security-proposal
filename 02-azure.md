@@ -177,6 +177,11 @@ of protected data, it is recommended that
 be utilized. *Note, however, that not all Azure services support customer
 managed keys.*
 
+The use of Customer Managed Keys is recommended by the Center
+for Internet Security (CIS) for storing sensitive data, as well
+as the ITSG-33 controls SC-28 (PROTECTION OF INFORMATION AT REST)
+and SC-12 (CRYPTOGRAPHIC KEY ESTABLISHMENT AND MANAGEMENT).
+
 > **Recommendation AZ-STR-01**: Customer Managed Keys be utlized where possible
 > within the Azure environment.
 
@@ -186,7 +191,7 @@ managed keys.*
 > There are two options:
 >
 > - Shared HSM: $1.28/key/month + $0.039/10000 transactions
-> - Single-tenant HSM: $6.208/hours (~$4,600/mnth)
+> - Single-tenant HSM: $6.208/hour (~$4,600/month)
 >
 > Automatic key rotation should be configured for storage encryption keys,
 > assuming this is available for all services. If it is not, then manual
@@ -198,7 +203,10 @@ With the foundational Azure configuration and network configuration,
 we can now build the Azure Kubernetes Service (AKS) cluster for the
 Advanced Analytics Workspaces environment.
 
-AKS supports functionality such as:
+All the functionality discussed above was designed with the understand
+of what features are supported and not supported by the Azure Kubernetes
+Service. Therefore, the following recommendations are based on the base
+Azure concepts presented above.
 
 > **Recommendation AZ-AKS-01**: The AAW Kubernetes cluster would be constructed
 > with the following node pools:
@@ -212,8 +220,10 @@ AKS supports functionality such as:
 > | `user-gpu-unclassified` | `Standard_NC6s_v3` | `user-unclassified` | Unclassified user GPU workloads                          |
 > | `user-protected-b`      | `Standard_D16s_v3` | `user-protected-b`  | Protected B user workloads                               |
 > | `user-gpu-protected-b`  | `Standard_NC6s_v3` | `user-protected-b`  | Protected B user GPU workloads                           |
-
-> **Recommendation AZ-AKS-02**: Longer term, as more heavy analytical-based workloads
+>
+> (addendum)
+>
+> Longer term, as more heavy analytical-based workloads
 > are run in the AAW environment, it is recommended that the DAaaS team investigate
 > the use of [spot node pools](https://docs.microsoft.com/en-us/azure/aks/spot-node-pool).
 >
@@ -225,8 +235,7 @@ AKS supports functionality such as:
 > | `spot-unclassified` | `Standard_D16s_v3` | `user-unclassified` | Unclassified user spot workloads |
 > | `spot-protected-b`  | `Standard_D16s_v3` | `user-protected-b`  | Protected B user spot workloads  |
 
-> **Recommendation AZ-AKS-03**: The cluster be constructed with the
-> following features enabled:
+> The cluster be constructed with the following features enabled:
 >
 > * [User defined routing](https://docs.microsoft.com/en-us/azure/aks/egress-outboundtype)
 > * [Azure Active Directory authentication](https://docs.microsoft.com/en-us/azure/aks/managed-aad)
@@ -239,9 +248,9 @@ private AKS cluster (using Private Link). Unfortunately, due to reliance
 on external tooling such as GitHub Actions, this is not possible. Therefore,
 the next best option is to apply firewalls protecting the control plane.
 
-> **Recommendation AZ-AKS-04**: Apply control plane firewall which
+> **Recommendation AZ-AKS-02**: Apply control plane firewall which
 > restricts access to Statistics Canada networks only.
 
-> **Recommendation AZ-AKS-05**: To manage the Kubernetes cluster from
+> **Recommendation AZ-AKS-03**: To manage the Kubernetes cluster from
 > GitHub Actions, a self-hosted runner should be deployed and utilized
 > so that access to the API server can be kept limited.
