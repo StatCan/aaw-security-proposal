@@ -1,10 +1,10 @@
 # Azure Resources
 
 The Advanced Analytics Workspaces (AAW) runs within the Azure Cloud
-environment, and as the base of the system, it's critical
-that it provides a secure environment to build a Protected B
-Advanced Analytics Workspaces system within. This section discusses
-the proposed implementation of the Azure resources. Simply put,
+environment. Thus, it's critical that the Azure resources be correctly
+configured to provide a secure context for the AAW and its associated
+Protected B workloads. This section discusses the proposed
+implementation of these Azure resources. Simply put,
 the following diagram depicts the overall layout of the Azure
 resources (based on network configuration):
 
