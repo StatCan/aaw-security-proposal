@@ -15,7 +15,8 @@ Workloads that are explicitly indicated as being Protected will have a series of
 restrictions placed on them and, in turn, may gain controlled access to
 Protected resources.
 
-The proposed identification method for workload identification is labels.
+A metadata-driven approach to proactive identification of Protected
+workloads is recommended, implemented using Kubernetes labels.
 
 ## Labels
 
