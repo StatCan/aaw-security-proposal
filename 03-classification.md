@@ -51,7 +51,7 @@ will represent the classification of data that is processed by the object.
 | `protected-a`      | Protected A      |
 | **`protected-b`**  | **Protected B**  |
 | `protected-c`      | Protected C      |
-| `classified`       | Classified       |
+| `confidential`     | Confidential     |
 | `secret`           | Secret           |
 | `top-secret`       | Top Secret       |
 
@@ -60,8 +60,8 @@ will represent the classification of data that is processed by the object.
 
 **Important note**: Labels in Kubernetes are mutable, meaning they can be
 changed at any time. To prevent security incidents, we must enforce that
-the classification label be immutable. This will be done through Gatekeeper
-and the Open Policy Agent.
+the `data.statcan.gc.ca/classification` label be immutable.
+This will be done through Gatekeeper and the Open Policy Agent.
 
 > **Recommendation CL-LBL-02**: The proposed Kubernetes label
 > `data.statcan.gc.ca/classification` be made "immutable"
