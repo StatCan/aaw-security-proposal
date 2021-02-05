@@ -161,11 +161,12 @@ the control of traffic between subnets in a Virtual Network.
 >
 > 1. `load-balancers` may accept traffic from any subnet. Restricting
 >    access to load balancers is done on a per-subnet outbound restriction.
-> 2. `system` subnet can accept any traffic to and from the `user-` subnets.
+> 2. `system` subnet can accept any traffic to and from the `user-*` subnets.
 > 3. `user-*` subnets can accept any traffic to/from the system subnet,
->    but not between user subnets.
-> 4. `*-protected-b` subnets can only accept traffic from the `system` subnet,
->    blocking traffic from other subnets.
+>    but not between user subnets. These subnets may also access the
+>    matching `data-*` subnet.
+> 4. `data-*` subnets can accept any traffic to/from the matching user subnet,
+>    but not between other subnets.
 
 ## Disk storage
 
