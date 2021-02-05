@@ -1,8 +1,9 @@
 # Storage
 
 Data is the largest asset and attack surface of Protected B workloads
-within the Advanced Analytics Workspaces. The AAW environment consists
-currently of two main types of storage:
+within the Advanced Analytics Workspaces. This section is focusing
+on storage controlled by users directely. The AAW environment consists
+currently of two main types of user storage:
 
 *	Disk storage (attached to one pod at a time)
 *	Object storage
@@ -13,9 +14,14 @@ Additionally, data is obtained from the following sources:
 * Statistics Canada public data
 * External data sources
 
-Access to data stores will be more restricted from protected workloads.
+Kubernetes supports other storage providers, including mounting of local
+directories into a container, but this is blocked by existing Gatekeeper
+policies.
 
 In general, the rules are:
+
+> **Data store**: Any location, physical or logical, which is capable of
+> storing user-generated data.
 
 1. Protected B data stores may be read and written to by a Protected B workload
 2. Unclassified data stores may be **only read** by a Protected B workload
@@ -32,16 +38,16 @@ disk and the classification of the pod it is being connected to. The following
 table describes the disk classification, disk mode and pod classification, and
 whether the combination is permitted or denied:
 
-| Disk Classification | Disk Mode  | Pod Classification | Result    |
-|---------------------|------------|--------------------|-----------|
-| Unclassified        | Read only  | Unclassified       | Permitted |
-| Unclassified        | Read/write | Unclassified       | Permitted |
-| Unclassified        | Read only  | Protected B        | Permitted |
-| Unclassified        | Read/write | Protected B        | Denied    |
-| Protected B         | Read only  | Unclassified       | Denied    |
-| Protected B         | Read/write | Unclassified       | Denied    |
-| Protected B         | Read only  | Protected B        | Permitted |
-| Protected B         | Read/write | Protected B        | Permitted |
+| Pod Classification | Disk Classification | Disk Mode  | Result    |
+|--------------------|---------------------|------------|-----------|
+| Unclassified       | Unclassified        | Read only  | Permitted |
+| Unclassified       | Unclassified        | Read/write | Permitted |
+| Unclassified       | Protected B         | Read only  | Denied    |
+| Unclassified       | Protected B         | Read/write | Denied    |
+| Protected B        | Unclassified        | Read only  | Permitted |
+| Protected B        | Unclassified        | Read/write | Denied    |
+| Protected B        | Protected B         | Read only  | Permitted |
+| Protected B        | Protected B         | Read/write | Permitted |
 
 > Disk policies will be enforced by policy in Gatekeeper and the
 > Open Policy Agent.
