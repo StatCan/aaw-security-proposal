@@ -59,8 +59,12 @@ whether the combination is permitted or denied:
 
 A separate Protected B MinIO instance will be created for protected workloads.
 This MinIO instance will operate similar to the existing MinIO instances,
-except it will not be available outside of protected workloads
-(no web interface).
+except it will not be available outside of protected workloads (optionally,
+the web interface can be enabled and only available to Protected B workloads).
+
+Because this proposal does not contain any provisions on how to share data
+between Protected B workloads, there will be no shared folder instance
+on the Protected B MinIO object store.
 
 Restricted access to MinIO storage will be implemented
 using *Network Policies*.
