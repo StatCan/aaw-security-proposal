@@ -131,7 +131,7 @@ within the cluster.
 
 > **Recommendation KUBE-RBAC-02**: Kubeflow assigns a large set of permissions
 > to the `default-editor` account. These permissions should be reviewed and
-> restricted to essential needs only.
+> restricted to essential/functional needs only.
 >
 > *This is an ongoing excercise outside of this proposal, therefore
 > I will not propose specific requirements, but instead strongly
