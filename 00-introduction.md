@@ -59,15 +59,18 @@ security of the platform. This proposal will focus on the following
 components of Kubernetes and platform components to provide an isolated
 Protected B compute environment:
 
-- Kubernetes Network Policies
-- Istio Service Mesh
-- Gatekeeper policies
-- Fluentd / Elasticsearch
+- Azure-level resources
+- Kubernetes
+  - Storage policies
+  - Network policies
+  - Istio Service Mesh
+  - Fluentd / Elasticsearch
+- MinIO
 
 Further, this proposal will discuss securing the Kubeflow component to provide
 users with the appropriate environment for running Protected B data analysis:
 
-- Jupyter Notebooks
+- Kubeflow Notebook Notebooks
 - Remote Desktop
 - Kubeflow Pipelines
 
