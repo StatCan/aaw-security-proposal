@@ -109,7 +109,7 @@ within the cluster.
 > **Recommendation KUBE-RBAC-01**: That 3 distinct Azure AD groups
 > be created to align with three Kubernetes roles.
 >
-> 1. **DAaaS-Breakglass-Admin**: Full administrative access
+> 1. **DAaaS-Breakglass-Admins**: Full administrative access
 >    to the entire system, including user namespaces.
 >
 >    Users in this group may access the admin configuration
@@ -118,11 +118,11 @@ within the cluster.
 >
 >    This group should be assigned to admin cloud accounts only,
 >    and not to normal user account.
-> 2. **DAaaS-Platform-Admin**: Full administrative access to
+> 2. **DAaaS-Platform-Admins**: Full administrative access to
 >    system and DAaaS system namespaces, no access to user namespaces.
-> 3. **DAaaS-Admin**: Access to DAaaS system namespaces,
+> 3. **DAaaS-Admins**: Access to DAaaS system namespaces,
 >    no access to user namespaces.
-> 4. **DAaaS-User**: No global RBAC configuration. Users will typically
+> 4. **DAaaS-Users**: No global RBAC configuration. Users will typically
 >    be granted access to any profiles they have access to.
 >
 > All roles are to have the permission to pull the Kubernetes configuration
