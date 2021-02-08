@@ -1,12 +1,11 @@
 # Limitations
 
 During the preparation of a security design for enabling Protected B workloads
-in the existing Advanced Analytics Workspaces (AAW) it was determined that
-it is not feasible to properly secure the environment for Protected B
-workloads. Therefore, this proposal does not propose adding Protected B
-workloads into the existing AAW environment but instead re-construct
-the AAW environment in a manner that facilitates the necessary controls
-to properly isolate and control security controls.
+in the existing Advanced Analytics Workspaces (AAW), it was determined that
+while not unfeasible to integrate them in the existing environment, a more
+secure AAW environment could be re-constructed to provide the appropriate
+levels of defence, including providing better workload isolation between
+levels of data classification.
 
 ## Options
 
