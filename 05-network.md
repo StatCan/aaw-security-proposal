@@ -126,4 +126,4 @@ code system in AAW:
 >
 > **DAaaS should identify the best solution based on the
 > needs of its users, and therefore this proposal
-> does not specific a specific solution.**
+> does not specify a specific solution.**
