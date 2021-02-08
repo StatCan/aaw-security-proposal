@@ -9,14 +9,10 @@ in violation of Protected B controls.
 Therefore, for Jupyter Notebooks to be used with Protected B data:
 
 > **Recommendation KF-NB-01**: The download functionality be disabled
-> in the Jupyter Notebooks environment. If this functionality cannot
-> be disabled, then Jupyter Notebooks must not be used with
-> Protected B workloads.
+> in the Jupyter Notebooks environment, if possible.
 
 > **Recommendation KF-NB-02**: The copy/paste functionality be disabled
-> in the Jupyter Notebooks environment. If this functionality cannot
-> be disabled, then Jupyter Notebooks must not be used with
-> Protected B workloads.
+> in the Jupyter Notebooks environment, if possible.
 
 To make a notebook Protected B capable, a "Configuration" option will
 be added that applies the appropriate configuration for Protected B
