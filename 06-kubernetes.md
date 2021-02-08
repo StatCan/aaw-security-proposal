@@ -96,6 +96,10 @@ suggested in this proposal.
 > be created which prevents `kubectl exec` on any pods
 > marked with a classification of `protected-b`.
 
+> **Recommendation KUBE-GK-05**: A gatekeeper policy
+> be created which prevents `kubectl cp` on any pods
+> marked with a classification of `protected-b`.
+
 ## Access control
 
 Kubernetes has a robust Role-Based Access Control (RBAC) system,
