@@ -106,8 +106,8 @@ Kubernetes has a robust Role-Based Access Control (RBAC) system,
 that enables fine-grained control over a user's permissions
 within the cluster.
 
-> **Recommendation KUBE-RBAC-01**: That 3 distinct Azure AD groups
-> be created to align with three Kubernetes roles.
+> **Recommendation KUBE-RBAC-01**: That the following Azure AD groups
+> be created to align with Kubernetes roles:
 >
 > 1. **DAaaS-Breakglass-Admins**: Full administrative access
 >    to the entire system, including user namespaces.
