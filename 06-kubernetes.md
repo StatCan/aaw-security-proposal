@@ -54,6 +54,17 @@ Protected B workloads.
 > currently in place. Ideally, this list should be restricted
 > to AAW controller image repositories only.
 
+> **Recommendation KUBE-IMG-04**: Images running in the environment
+> must align with CIS benchmarks. Images in the production environment
+> must be built via an automated build pipeline which includes
+> a `dockle` scan (for CIS benchmarks). In particular, user
+> containers must not run as the `ROOT` user.
+>
+> Images built by developers must be restricted to the development
+> environment. This can be accomplished via a different repository,
+> where the production environment does not have permissions to
+> the dev repository.
+
 ## Gatekeeper / Open Policy Agent
 
 Gatekeeper and the Open Policy Agent provide a mechanism
