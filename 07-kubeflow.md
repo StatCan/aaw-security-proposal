@@ -1,5 +1,4 @@
 # Kubeflow
-
 ## Jupyter Notebooks
 
 Jupyter Notebooks are the main component of the AAW environment that
@@ -42,3 +41,16 @@ MinIO object store.
 
 > **Recommendation KF-PL-01**: Kubeflow Pipelines be disabled
 > for Protected B workloads, enforced by Gatekeeper.
+
+## Contributors
+
+Kubeflow provides the ability to shared profiles with other users
+of the Advanced Analytics Workspaces (AAW). Given the high likelihood
+of users needing to collaborate on Protected B workloads, this should
+not be restricted in the environment.
+
+> **Recommendation KUBE-CONTRIB-01**: Profile contributors continue
+> to be permitted in the environment. A reminder / terms of usage
+> should be sent to users onboarding into the environment that
+> they are responsible for maintaining the "Need to Know" of
+> Protected B data when adding contributors to a profile they own.
