@@ -81,3 +81,54 @@ suggested in this proposal.
 > Gatekeeper is unavailable that all changes are blocked.
 > This ensures that policy violations are not introduced
 > in the event of a Gatekeeper outage.
+
+> **Recommendation KUBE-GK-02**: Gatekeeper configuration
+> be reviewed to ensure that it is highly-available
+> and will scale with any increased load, to prevent
+> a system outage.
+
+> **Recommendation KUBE-GK-03**: Existing policies
+> in https://github.com/StatCan/gatekeeper-policies be used.
+> Any policy currently in "audit" state should be moved
+> to enforce state on user namesapces.
+
+> **Recommendation KUBE-GK-04**: A gatekeeper policy
+> be created which prevents `kubectl exec` on any pods
+> marked with a classification of `protected-b`.
+
+## Access control
+
+Kubernetes has a robust Role-Based Access Control (RBAC) system,
+that enables fine-grained control over a user's permissions
+within the cluster.
+
+> **Recommendation KUBE-RBAC-01**: That 3 distinct Azure AD groups
+> be created to align with three Kubernetes roles.
+>
+> 1. **DAaaS-Breakglass-Admin**: Full administrative access
+>    to the entire system, including user namespaces.
+>
+>    Users in this group may access the admin configuration
+>    context in the event that Azure AD authentication is
+>    not functioning.
+>
+>    This group should be assigned to admin cloud accounts only,
+>    and not to normal user account.
+> 2. **DAaaS-Platform-Admin**: Full administrative access to
+>    system and DAaaS system namespaces, no access to user namespaces.
+> 3. **DAaaS-Admin**: Access to DAaaS system namespaces,
+>    no access to user namespaces.
+> 4. **DAaaS-User**: No global RBAC configuration. Users will typically
+>    be granted access to any profiles they have access to.
+>
+> All roles are to have the permission to pull the Kubernetes configuration
+> file to access the cluster. (Users must still authenticate with Azure AD
+> in order to be mapped to Kubernetes RBAC roles.)
+
+> **Recommendation KUBE-RBAC-02**: Kubeflow assigns a large set of permissions
+> to the `default-editor` account. These permissions should be reviewed and
+> restricted to essential needs only.
+>
+> *This is an ongoing excercise outside of this proposal, therefore
+> I will not propose specific requirements, but instead strongly
+> recommend that the excercise be continued and completed*.
