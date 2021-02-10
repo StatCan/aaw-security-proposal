@@ -70,7 +70,7 @@ Protected B compute environment:
 Further, this proposal will discuss securing the Kubeflow component to provide
 users with the appropriate environment for running Protected B data analysis:
 
-- Kubeflow Notebook Notebooks
+- Kubeflow Notebook Servers
 - Remote Desktop
 - Kubeflow Pipelines
 
