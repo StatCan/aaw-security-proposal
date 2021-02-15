@@ -1,20 +1,21 @@
 # Kubeflow
-## Jupyter Notebooks
 
-Jupyter Notebooks are the main component of the AAW environment that
+## Kubeflow Notebooks
+
+Kubeflow Notebooks are the main component of the AAW environment that
 is relied upon by users to perform their analysis processes. These
 notebooks, while powerful, contain functionality that are directly
 in violation of Protected B controls.
 
-Therefore, for Jupyter Notebooks to be used with Protected B data:
+Therefore, for Kubeflow Notebooks to be used with Protected B data:
 
 > **Recommendation KF-NB-01**: The download functionality be disabled
-> in the Jupyter Notebooks environment, if possible. Assuming this
+> in the Kubeflow Notebooks environment, if possible. Assuming this
 > functionality is provided by means of a URL, then the URL can
 > be restricted using Istio.
 
 > **Recommendation KF-NB-02**: The copy/paste functionality be disabled
-> in the Jupyter Notebooks environment, if possible.
+> in the Kubeflow Notebooks environment, if possible.
 
 To make a notebook Protected B capable, a "Configuration" option will
 be added that applies the appropriate configuration for Protected B
