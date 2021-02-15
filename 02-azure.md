@@ -259,3 +259,11 @@ the next best option is to apply firewalls protecting the control plane.
 > **Recommendation AZ-AKS-03**: To manage the Kubernetes cluster from
 > GitHub Actions, a self-hosted runner should be deployed and utilized
 > so that access to the API server can be kept limited.
+
+## Infrastructure as Code
+
+> **Recommendation KUBE-CAC-01**: All Azure resources deployed to the
+> Advanced Analytics Workspaces environment be managed via
+> Terraform, a Infrastructure as Code tool.
+>
+> The only resource exempt from this requirement is the Subscription.
