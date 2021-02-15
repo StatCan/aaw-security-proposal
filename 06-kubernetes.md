@@ -1,5 +1,9 @@
 # Kubernetes
 
+> Note: Generally in this section, the terminology of namespace vs. profile
+> is interchangeable. Profiles map directly to a namespace, and in the
+> AAW environment user namespaces are not seperately provisioned.
+
 ## Workloads scheduling
 
 Kubernetes has a diverse and powerful scheduler for locating
@@ -18,9 +22,17 @@ nodes.
 | `data.statcan.gc.ca/classification` | `(unclassified|protected-b)` | Maximum data classification of the node |
 | `node.statcan.gc.ca/purpose`        | `(system|user)`              | Purpose of the node                     |
 
+### Namespaces labels
+
+System namespaces will be identified by
+
+| Label                             | Value                 | Purpose                   |
+|-----------------------------------|-----------------------|---------------------------|
+| `namespace.statcan.gc.ca/purpose` | `(system|daaas|user)` | Purpose of the namespace. |
+
 #### Node selectors on workloads
 
-> **Recommendation KUBE-NODE-01**: All pods must have a `nodeSelector
+> **Recommendation KUBE-NODE-01**: All pods must have a `nodeSelector`
 > which indicates the criteria for a node selection, requiring
 > both the classification and purpose labels for any workload
 > being scheduled in the AAW environment. This will be enforced
@@ -31,7 +43,11 @@ nodes.
 > over them.*
 >
 > *Note: Setting `node.statcan.gc.ca/purpose=system` as a node selector
-> is only permitted from pre-authorized namespaces.*
+> is only permitted from namespaces having `namespace.statcan.gc.ca/purpose=system`
+> and `namespace.statcan.gc.ca/purpose=daaas`.*
+>
+> If `namespace.statcan.gc.ca/purpose` is unset on a namespace, then the namespace
+> is assumed to be a `user` namesapce.
 
 ## Images
 
@@ -64,6 +80,12 @@ Protected B workloads.
 > environment. This can be accomplished via a different repository,
 > where the production environment does not have permissions to
 > the dev repository.
+
+> **Recommendation KUBE-IMG-05**: User namespaces contain image pull
+> credentials which restrict read-only access in Artifactory to:
+>
+> 1. DAaaS kubeflow images repository
+> 2. Repositories assigned to the namespace
 
 ## Gatekeeper / Open Policy Agent
 
@@ -109,7 +131,7 @@ within the cluster.
 > **Recommendation KUBE-RBAC-01**: That the following Azure AD groups
 > be created to align with Kubernetes roles:
 >
-> 1. **DAaaS-Breakglass-Admins**: Full administrative access
+> 1. **`DAaaS-Breakglass-Admins`**: Full administrative access
 >    to the entire system, including user namespaces.
 >
 >    Users in this group may access the admin configuration
@@ -118,16 +140,29 @@ within the cluster.
 >
 >    This group should be assigned to admin cloud accounts only,
 >    and not to normal user account.
-> 2. **DAaaS-Platform-Admins**: Full administrative access to
->    system and DAaaS system namespaces, no access to user namespaces.
-> 3. **DAaaS-Admins**: Access to DAaaS system namespaces,
+> 2. **`DAaaS-Platform-Admins`**: Full administrative access to
+>    system, no access to DAaaS or user namespaces.
+> 3. **`DAaaS-Admins`**: Access to DAaaS system namespaces,
 >    no access to user namespaces.
-> 4. **DAaaS-Users**: No global RBAC configuration. Users will typically
+> 4. **`DAaaS-Support`**: Limited access to user namespaces to provide
+>    general debugging support.
+> 5. **`DAaaS-Users`**: No global RBAC configuration. Users will typically
 >    be granted access to any profiles they have access to.
 >
-> All roles are to have the permission to pull the Kubernetes configuration
-> file to access the cluster. (Users must still authenticate with Azure AD
-> in order to be mapped to Kubernetes RBAC roles.)
+> All "-admins" and "-support" roles are to have the permission to pull
+> the Kubernetes configuration file to access the cluster.
+
+> **Recommendation KUBE-RBAC-01a**: As an extension of KUBE-RBAC-01,
+> this recommendation further elaborates the permissions assigned
+> to the `DAaaS-Support` group.
+>
+> - Read and list all resources associated with the Kubeflow
+>   environment: `Profiles`, `Deployments`, `Statefulsets`, `Replicasets`,
+>   `Pods`, `Notebooks`, `Workflows`, `PersistentVolumeClaims`, `Roles`
+>   , `RoleBindings` and `Events`.
+> - List `ConfigMaps` and `Secrets` (no read due to the possibility of
+>   of sensitive values)
+> - Read and list `Nodes`
 
 > **Recommendation KUBE-RBAC-02**: Kubeflow assigns a large set of permissions
 > to the `default-editor` account. These permissions should be reviewed and
@@ -136,3 +171,8 @@ within the cluster.
 > *This is an ongoing excercise outside of this proposal, therefore
 > I will not propose specific requirements, but instead strongly
 > recommend that the excercise be continued and completed*.
+
+> **Recommendation KUBE-RBAC-03**: To better restrict user access to the AAW
+> environment, access to any web application which allows interaction with
+> any compute or storage, other than publicly accessible component, is to
+> be limited to the `DAaaS-Users` group.

@@ -21,3 +21,11 @@ and usability/maintainability was provided by option 2.
 
 Therefore, this proposal describes the use of one cluster for
 both Unclassified and Protected B workloads.
+
+## Development requirements
+
+Some of the recommendations in this document may require some
+custom development of control components in order to implement
+the recommendation.
+
+\newpage

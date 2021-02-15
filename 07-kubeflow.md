@@ -9,7 +9,9 @@ in violation of Protected B controls.
 Therefore, for Jupyter Notebooks to be used with Protected B data:
 
 > **Recommendation KF-NB-01**: The download functionality be disabled
-> in the Jupyter Notebooks environment, if possible.
+> in the Jupyter Notebooks environment, if possible. Assuming this
+> functionality is provided by means of a URL, then the URL can
+> be restricted using Istio.
 
 > **Recommendation KF-NB-02**: The copy/paste functionality be disabled
 > in the Jupyter Notebooks environment, if possible.
@@ -36,7 +38,9 @@ the final output and artifacts are stored in an uncontrolled
 MinIO object store.
 
 > **Recommendation KF-PL-01**: Kubeflow Pipelines be disabled
-> for Protected B workloads, enforced by Gatekeeper.
+> for Protected B workloads, enforced by Gatekeeper, until
+> the pipelines system can be appropriately isolated
+> between users and data classifications.
 
 ## Contributors
 

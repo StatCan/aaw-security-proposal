@@ -6,7 +6,7 @@ is fundamental to preventing the exfiltration of protected data.
 Within the protected workloads running in AAW, all network activity
 will be **deny-by-default**. Specific exemptions will be made
 for accessing authorized storage environments and systems, with
-each whitelisted service undergoing an assessment for its security
+each allowlisted service undergoing an assessment for its security
 posture with regards to data exfiltration.
 
 **Relation with Azure controls**: The AAW environment is relying
@@ -25,24 +25,9 @@ The primary mechanism for restricting network activity will be via Kubernetes
 Network Policies. Network policies are implemented in the Azure Kubernetes
 environment via the Linux iptables firewall on each node.
 
-The default deny rule that will block all ingress and egress traffic:
-
-```yaml
-apiVersion: networking.k8s.io/v1
-kind: NetworkPolicy
-metadata:
-  name: pb-deny-by-default
-  namespace: $NAMESPACE
-spec:
-  podSelector:
-    matchLabels:
-      data.statcan.gc.ca/classification: protected-b
-  policyTypes:
-  - Ingress
-  - Egress
-```
-
-> **Recommendation NET-POL-01**: The above network policy strategy be approved.
+> **Recommendation NET-POL-01**: That traffic to and from Protected B
+> workloads in the cluster be deny-by-default. Exceptions be made
+> for operational needs only.
 
 ## In-transit encryption
 
@@ -84,6 +69,9 @@ the environment.
 
 > **Recommendation NET-ES-03**: X-Ray should be installed alongside Artifactory
 > to provide for CVE scanning of packages being imported into the environment.
+
+The use of Artifactory would also open up the possibility of user repositories
+should this become a desired function of the Advanced Analytics Workspaces.
 
 ### Source code
 

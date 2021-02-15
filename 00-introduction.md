@@ -81,3 +81,11 @@ This proposal was created by Zachary Seguin, with the assistance of
 William Hearn, Justin Bertrand, Brendan Gadd, Andrew Scribner, Blair Drummond and Charles Bélisle.
 
 Any questions should be directed to [zachary.seguin@canada.ca](mailto:zachary.seguin@canada.ca).
+
+## Disclaimer
+
+Many of the recommendations of this document are intended to align
+with the best practicies of the industry, as well as the
+security requirements specified in ITSG-22/ITSG-33. However, no explicit
+mapping excercise was performed between the ITSG-22/ITSG-33 controls
+and this proposal.
