@@ -28,11 +28,11 @@ COVID-19 pandemic which caused a shift in work environment for
 Statistics Canada employees. AAW was tasked with providing an unclassified
 compute environment to allow for data scientists to perform analysis
 work using a public cloud compute environment without requiring access
-to Statistics Canada networks and  issued devices.
+to Statistics Canada networks and issued devices.
 
 Statistics Canada is now interested in expanding the environment to
 include Protected B data. This requires modification to the environment
-to support the necessary isolation and exfiltration protections.
+to enable the necessary isolation and exfiltration protections.
 
 The platform was built as a collaboration between:
 

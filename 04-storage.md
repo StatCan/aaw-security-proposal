@@ -94,7 +94,7 @@ Protected B instance.
 > process be approved, providing a write-only bucket in the Unclassified
 > instance mapped to a read-only bucket on the Protected B instance.
 
-## Receiving and outputing Protected B data to/from AAW
+## Receiving and outputting Protected B data to/from AAW
 
 This proposal does not propose a solution for receiving Protected B data into
 the environment nor for extracting output from completed analysis. This will
