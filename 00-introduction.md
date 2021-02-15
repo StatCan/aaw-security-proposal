@@ -89,3 +89,12 @@ with the best practicies of the industry, as well as the
 security requirements specified in ITSG-22/ITSG-33. However, no explicit
 mapping excercise was performed between the ITSG-22/ITSG-33 controls
 and this proposal.
+
+### Reporting a security issue
+
+If you identify an issue with the Advanced Analytics Workspaces environment
+or with this security proposal, then please send an email
+(encrypted, if possible) to
+[brendan.gadd@canada.ca](mailto:brendan.gadd@canada.ca),
+[william.hearn@canada.ca](mailto:william.hearn@canada.ca),
+and [zachary.seguin@canada.ca](mailto:zachary.seguin@canada.ca).
