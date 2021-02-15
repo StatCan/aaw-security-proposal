@@ -39,6 +39,18 @@ both the client and the server verify each other's identity.
 > **Recommendation NET-TR-01**: Istio be used for inter-service traffic
 > of Protected B workloads, providing mutual TLS encryption.
 
+> **Recommendation NET-TR-02**: A gatekeeper policy be implemented which
+> prevents disabling the Istio sidecar on Protected B workloads.
+>
+> - Block the following annotations:
+>   - `sidecar.istio.io/inject: 'false'`
+>   - `traffic.sidecar.istio.io/excludeOutboundPorts`
+>   - `traffic.sidecar.istio.io/excludeOutboundIPRanges`
+>   - `traffic.sidecar.istio.io/excludeInboundPorts`
+>   - `traffic.sidecar.istio.io/excludeInboundIPRanges`
+> - Block containers from running as user `1337`, which
+>   bypasses the Istio proxy
+
 ## External services
 
 Protected B workloads should not connect directly to any external service.
