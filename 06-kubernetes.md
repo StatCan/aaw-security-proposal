@@ -159,7 +159,7 @@ within the cluster.
 > - Read and list all resources associated with the Kubeflow
 >   environment: `Profiles`, `Deployments`, `Statefulsets`, `Replicasets`,
 >   `Pods`, `Notebooks`, `Workflows`, `PersistentVolumeClaims`, `Roles`
->   , `RoleBindings` and `Events`.
+>   , `RoleBindings`, `Events`, `ResourceLimits`.
 > - List `ConfigMaps` and `Secrets` (no read due to the possibility of
 >   of sensitive values)
 > - Read and list `Nodes`
@@ -176,3 +176,17 @@ within the cluster.
 > environment, access to any web application which allows interaction with
 > any compute or storage, other than publicly accessible component, is to
 > be limited to the `DAaaS-Users` group.
+
+## Resource quotas
+
+Users, whether intentional or accidental, can perform a "Denial of Service"
+attack against the environment, making the environment unavailable to others.
+
+> **Recommendation KUBE-RSRC-01**: Resource quotas be implemented on all
+> namespaces to prevent an intential or accidental denial of service
+> attack against the cluster.
+>
+> Info: [https://kubernetes.io/docs/concepts/policy/resource-quotas/](https://kubernetes.io/docs/concepts/policy/resource-quotas/)
+>
+> **A further excercise will be required to identify reasonable
+> limits to put in place for each namespace**.
