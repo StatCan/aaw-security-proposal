@@ -24,8 +24,7 @@ In general, the rules are:
 > storing user-generated data.
 
 1. Protected B data stores may be read and written to by a Protected B workload
-2. Unclassified data stores may be **only read** by a Protected B workload
-3. Protected B data stores may never be accessed from an unclassified workload
+2. Protected B data stores may never be accessed from an unclassified workload
 
 *Note: This proposal does not define sharing of data between Protected B
 workloads. This is left to the DAaaS project to elaborate and design
@@ -44,7 +43,7 @@ whether the combination is permitted or denied:
 | Unclassified       | Unclassified        | Read/write | Permitted |
 | Unclassified       | Protected B         | Read only  | Denied    |
 | Unclassified       | Protected B         | Read/write | Denied    |
-| Protected B        | Unclassified        | Read only  | Permitted |
+| Protected B        | Unclassified        | Read only  | Denied    |
 | Protected B        | Unclassified        | Read/write | Denied    |
 | Protected B        | Protected B         | Read only  | Permitted |
 | Protected B        | Protected B         | Read/write | Permitted |
