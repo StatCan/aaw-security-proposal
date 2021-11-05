@@ -11,5 +11,5 @@ jobs:
     - uses: actions/checkout@master
     - name: Build pdf
       run: |
-        sudo apk add make
+        apk add make git
         PDF_ENGINE=pdflatex make build

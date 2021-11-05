@@ -15,8 +15,6 @@ header-includes: |
 
 \begin{center}UNCLASSIFIED / NON-CLASSIFIÉ\end{center}
 
-\begin{center}\textbf{FINAL DRAFT: v1.0.0-rc1}\end{center}
-
 \newpage
 
 # Introduction
