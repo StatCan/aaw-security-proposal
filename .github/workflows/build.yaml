@@ -16,7 +16,7 @@ jobs:
     - name: Provide pdf
       uses: actions/upload-artifact@v2
       with:
-        name: proposal-pdf
+        name: proposal.pdf
         path: proposal.pdf
     - name: Release
       uses: softprops/action-gh-release@v1
