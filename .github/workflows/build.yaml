@@ -1,0 +1,15 @@
+name: build
+on: [push]
+
+jobs:
+  # Any checks that run pre-build
+  build:
+    runs-on: ubuntu-latest
+    container:
+      image: pandoc/latex:2.16.1
+    steps:
+    - uses: actions/checkout@master
+    - name: Build pdf
+      run: |
+        sudo apk add make
+        PDF_ENGINE=pdflatex make build
