@@ -5,7 +5,7 @@ build: proposal.pdf
 
 proposal.pdf: *.md
 	pandoc \
-		--metadata=subtitle:"Revision: $(VERSION)" \
+		--metadata=date:"Revision: $(VERSION)" \
 		--pdf-engine=$(PDF_ENGINE) \
 		-o $@ *.md
 
