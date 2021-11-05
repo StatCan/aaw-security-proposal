@@ -9,10 +9,21 @@ jobs:
       image: pandoc/latex:2.16.1
     steps:
     - uses: actions/checkout@master
+    - name: Get Commit or Tag
+      id: vars
+      run: |
+        tag="${GITHUB_SHA}"
+        if [ "${GITHUB_EVENT_NAME}" == "release" ]; then
+          ref="${GITHUB_REF}"
+          tag=$(echo $GITHUB_REF | sed 's/refs\/tags\///g')
+        fi
+        echo ::set-output name=tag::${GITHUB_REF#refs/*/}
     - name: Build pdf
       run: |
         apk add make git
-        PDF_ENGINE=pdflatex make build
+        PDF_ENGINE=pdflatex VERSION=$RELEASE_VERSION make build
+      env:
+        RELEASE_VERSION: ${{ steps.vars.outputs.tag }}
     - name: Provide pdf
       uses: actions/upload-artifact@v2
       with:
