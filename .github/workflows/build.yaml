@@ -17,7 +17,7 @@ jobs:
           ref="${GITHUB_REF}"
           tag=$(echo $GITHUB_REF | sed 's/refs\/tags\///g')
         fi
-        echo ::set-output name=tag::${GITHUB_REF#refs/*/}
+        echo "::set-output name=tag::$tag"
     - name: Build pdf
       run: |
         apk add make git
