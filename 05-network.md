@@ -110,6 +110,23 @@ Therefore, the recommendation for source code is a per namespace Gitea implement
 >
 >    In addition, a per-namespace Gitea implementation is proposed for both unclassified and protected-b work.
 >    Most aspects of the architecture are shown in the diagram below.
+>
+> Notable aspects of the design:
+>
+> - Each namespace in both unclassified and protected-b workloads will contain:
+>   - A Postgres database. Note: There are two Azure managed Postgres instances,
+>     a Protected-b instance, and an unclassified instance. A Postgres database will
+>     be provisioned for each namespace in each instance.
+> - A profile controller will to added to the
+>   [aaw-kubeflow-profile-controllers](https://github.com/StatCan/aaw-kubeflow-profiles-controller)
+>   repository:
+>   - The controller will be responsible for creating a Postgres database and Gitea
+>     instance for each Kubeflow profile
+>   - The controller will also be responsible for the creation and management of
+>     Kubernetes secrets that Gitea will use to connect to Postgres
+> - The Azure firewall will be configured to allow:
+>   - unclassified nodepool to connect to unclassified Postgres databases.
+>   - protected-b nodepool to connect to protected-b Postgres databases.
 
 ```mermaid
 flowchart TB;
@@ -252,20 +269,3 @@ flowchart TB;
     linkStyle 20 stroke-width:1px,fill:none,stroke:green;
 
 ```
-
-> Notable aspects of the design:
->
-> - Each namespace in both unclassified and protected-b workloads will contain:
->   - A Postgres database. Note: There are two Azure managed Postgres instances,
->     a Protected-b instance, and an unclassified instance. A Postgres database will
->     be provisioned for each namespace in each instance.
-> - A profile controller will to added to the
->   [aaw-kubeflow-profile-controllers](https://github.com/StatCan/aaw-kubeflow-profiles-controller)
->   repository:
->   - The controller will be responsible for creating a Postgres database and Gitea
->     instance for each Kubeflow profile
->   - The controller will also be responsible for the creation and management of
->     Kubernetes secrets that Gitea will use to connect to Postgres
-> - The Azure firewall will be configured to allow:
->   - unclassified nodepool to connect to unclassified Postgres databases.
->   - protected-b nodepool to connect to protected-b Postgres databases.
