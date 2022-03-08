@@ -93,6 +93,19 @@ Protected B instance.
 > process be approved, providing a write-only bucket in the Unclassified
 > instance mapped to a read-only bucket on the Protected B instance.
 
+### MinIO Gateway using Azure Blob Storage
+
+With regards to the _Recommendation STR-OBJ-02_ above, AAW has decided to use 
+Azure Blob Storage to eliminate the need for data copying.
+
+MinIO has a gateway feature that allows proxying requests to Azure Blob Storage. 
+All MinIO instances in AAW will use MinIO in gateway mode. This will eliminate 
+the need for data copying.
+
+A write-only bucket on the Standard MinIO instance will have the data stored in
+an Azure Blob Storage account, its counterpart read-only bucket on the
+protected B MinIO instance will use the same Azure Blob Storage account.
+
 ## Receiving and outputting Protected B data to/from AAW
 
 This proposal does not propose a solution for receiving Protected B data into
