@@ -70,7 +70,7 @@ cloud environment, so there is operational knowledge of the system.
 
 Package sources should be limited due to the potential risk they can introduce.
 
-> *NOTE*: This will require a paid Artifactory license.
+> _NOTE_: This will require a paid Artifactory license.
 
 Alternatively, installation of packages is not permitted. Only packages
 available in the compiled Docker images would be made available in
@@ -94,8 +94,7 @@ A source code system available to both unclassified and Protected B
 workloads introduces some complications from a security posture,
 and in particular how to prevent data exfiltration from the environment.
 
-Therefore, there are three proposals on how to implement a source
-code system in AAW:
+Therefore, the recommendation for source code is a per namespace Gitea implementation.
 
 > **Recommendation NET-ES-03**: For source code,
 >
@@ -109,21 +108,164 @@ code system in AAW:
 >    >
 >    > — https://www.tbs-sct.gc.ca/pol/doc-eng.aspx?id=32588#cha5
 >
->    and launch an internal-only GitLab instance accessible
->    only to Protected B workloads.
+>    In addition, a per-namespace Gitea implementation is proposed for both unclassified and protected-b work.
+>    Most aspects of the architecture are shown in the diagram below.
 >
-> 2. Launch a GitLab instance in the AAW environment which is
->    available to all workloads. Workloads running at the
->    Protected B level are granted only HEAD / GET requests
->    to the GitLab instance (to prevent data exfiltration).
->    POST requests to specificly authorized endpoints,
->    such as for authorization, will be allowed.
+> Notable aspects of the design:
 >
-> 3. Two seperate GitLab instances be launched in the AAW
->    environment, 1 for unclassified and 1 for Protected B.
->    This is the least recommended solution due to the
->    maintenance overhead.
->
-> **DAaaS should identify the best solution based on the
-> needs of its users, and therefore this proposal
-> does not specify a specific solution.**
+> - Each namespace in both unclassified and protected-b workloads will contain:
+>   - A Postgres database. Note: There are two Azure managed Postgres instances,
+>     a Protected-b instance, and an unclassified instance. A Postgres database will
+>     be provisioned for each namespace in each instance.
+> - A profile controller will to added to the
+>   [aaw-kubeflow-profile-controllers](https://github.com/StatCan/aaw-kubeflow-profiles-controller)
+>   repository:
+>   - The controller will be responsible for creating a Postgres database and Gitea
+>     instance for each Kubeflow profile
+>   - The controller will also be responsible for the creation and management of
+>     Kubernetes secrets that Gitea will use to connect to Postgres
+> - The Azure firewall will be configured to allow:
+>   - unclassified nodepool to connect to unclassified Postgres databases.
+>   - protected-b nodepool to connect to protected-b Postgres databases.
+
+```mermaid
+flowchart TB;
+  %% Global Label definitions
+  pcont(aaw-kubeflow-profiles-controller)
+
+  gitea_u_bob(Gitea)
+  gitea_b_bob(Gitea)
+  gitea_u_alice(Gitea)
+  gitea_b_alice(Gitea)
+
+  pg_b_bob[(Postgres DB\nbob)]
+  pg_u_bob[(Postgres DB\nbob)]
+  pg_b_alice[(Postgres DB\nalice)]
+  pg_u_alice[(Postgres DB\nalice)]
+
+  secret_b_bob["secret🔑"]
+  secret_u_bob["secret🔑"]
+  secret_b_alice["secret🔑"]
+  secret_u_alice["secret🔑"]
+
+  pinst_b(Azure Managed \nPostgres Instance\nProtected-b)
+  pinst_u(Azure Managed \nPostgres Instance\nUnclassified)
+  kf(Kubeflow)
+
+  notebook_b_bob(notebook\nprot-b)
+  notebook_u_bob(notebook\nunclassified)
+  notebook_b_alice(notebook\nprot-b)
+  notebook_u_alice(notebook\nunclassified)
+
+  %% Links
+  %% Links add hyperlinks to nodes
+  click pcont "https://github.com/StatCan/aaw-kubeflow-profiles-controller"
+
+  %% Main graph
+  Terraform -- configures ----> pinst_b & pinst_u
+
+  kf ----> notebook_b_bob & notebook_u_bob & notebook_b_alice & notebook_u_alice
+
+  %% Sub-graphs
+
+  subgraph Protected-b
+    subgraph azure_b[azure]
+      pinst_b -- creates --> pg_b_bob & pg_b_alice
+      azureFW_b("Azure Firewall 🛡️
+            allow protected-b
+            nodepool connections
+            to protected-b
+            Postgres DB's")
+    end
+    subgraph b_bob[bob]
+      gitea_b_bob --> secret_b_bob -- "connects🛡️" --> pg_b_bob
+      notebook_b_bob -- connects --> gitea_b_bob
+    end
+    subgraph b_alice[alice]
+      gitea_b_alice --> secret_b_alice -- "connects🛡️" --> pg_b_alice
+      notebook_b_alice -- connects --> gitea_b_alice
+    end
+  end
+
+  subgraph Unclassified
+    subgraph azure_u[azure]
+      pinst_u -- creates --> pg_u_bob & pg_u_alice
+      azureFW_u("Azure Firewall 🛡️
+            allow unclassified
+            nodepool connections
+            to unclassified
+            Postgres DB's")
+    end
+    subgraph bob
+      gitea_u_bob --> secret_u_bob -- "connects🛡️" --> pg_u_bob
+      notebook_u_bob -- connects --> gitea_u_bob
+    end
+    subgraph u_alice[alice]
+      gitea_u_alice --> secret_u_alice -- "connects🛡️" --> pg_u_alice
+      notebook_u_alice -- connects --> gitea_u_alice
+    end
+  end
+
+  subgraph daaas-system
+    pcont -- creates --> secret_b_bob & secret_u_bob & secret_b_alice & secret_u_alice
+    pcont -- connects -------> pinst_b & pinst_u
+  end
+
+
+  %% Styling
+    %% colors
+    classDef green fill:#229954
+    classDef grey fill:#7B7D7D;
+    classDef azureBlue fill:#5499C7;
+    classDef giteaGreen fill:#266112;
+    classDef kubeflowBlue fill:#2e4eb0;
+    classDef terraformRed fill:#d44444;
+
+    %% mappings to variables
+    class Protected-b green
+    class Unclassified grey
+
+    class pg_b_bob azureBlue
+    class pg_u_bob azureBlue
+    class pg_b_alice azureBlue
+    class pg_u_alice azureBlue
+    class azure_FW azureFW
+
+    class pinst_b azureBlue
+    class pinst_u azureBlue
+
+    class gitea_b_bob giteaGreen
+    class gitea_u_bob giteaGreen
+    class gitea_b_alice giteaGreen
+    class gitea_u_alice giteaGreen
+
+    class kf kubeflowBlue
+    class notebook_b_bob kubeflowBlue
+    class notebook_u_bob kubeflowBlue
+    class notebook_b_alice kubeflowBlue
+    class notebook_u_alice kubeflowBlue
+    class Terraform terraformRed
+
+    %% Lines
+    linkStyle 0 stroke-width:1px,fill:none,stroke:red;
+    linkStyle 1 stroke-width:1px,fill:none,stroke:red;
+
+    linkStyle 2 stroke-width:1px,fill:none,stroke:blue;
+    linkStyle 3 stroke-width:1px,fill:none,stroke:blue;
+    linkStyle 4 stroke-width:1px,fill:none,stroke:blue;
+    linkStyle 5 stroke-width:1px,fill:none,stroke:blue;
+    linkStyle 10 stroke-width:1px,fill:none,stroke:blue;
+    linkStyle 13 stroke-width:1px,fill:none,stroke:blue;
+    linkStyle 18 stroke-width:1px,fill:none,stroke:blue;
+    linkStyle 21 stroke-width:1px,fill:none,stroke:blue;
+
+    linkStyle 8 stroke-width:1px,fill:none,stroke:green;
+    linkStyle 11 stroke-width:1px,fill:none,stroke:green;
+    linkStyle 16 stroke-width:1px,fill:none,stroke:green;
+    linkStyle 19 stroke-width:1px,fill:none,stroke:green;
+    linkStyle 9 stroke-width:1px,fill:none,stroke:green;
+    linkStyle 12 stroke-width:1px,fill:none,stroke:green;
+    linkStyle 17 stroke-width:1px,fill:none,stroke:green;
+    linkStyle 20 stroke-width:1px,fill:none,stroke:green;
+
+```

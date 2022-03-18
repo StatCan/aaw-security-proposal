@@ -22,13 +22,8 @@ that the AAW team:
 > 1. Create a local docker repository in Artifactory
 > 2. Generate image pull credentials for Artifactory,
 >    applicable only to the namespace
-> 3. Configure the GitLab instance by pre-creating
->    a GitLab group.
->
->    (additional): If desired to manage the GitLab
->    group membership, the controller will update
->    on a regular basis as contributors are added
->    and removed from the namespace.
+> 3. Configure the Gitea instances for each profile, while managing
+>    keys for accessing Postgres.
 
 ## Azure Kubernetes Service (AKS)
 
@@ -40,6 +35,6 @@ that the AAW team:
 > added to the AAW AKS cluster:
 >
 > | Pool                | VM Type            | Subnet              | Purpose                          |
-> |---------------------|--------------------|---------------------|----------------------------------|
+> | ------------------- | ------------------ | ------------------- | -------------------------------- |
 > | `spot-unclassified` | `Standard_D16s_v3` | `user-unclassified` | Unclassified user spot workloads |
 > | `spot-protected-b`  | `Standard_D16s_v3` | `user-protected-b`  | Protected B user spot workloads  |
